@@ -139,33 +139,25 @@ public class Main extends Application {
 
         String searchValue = searchField.getText();
         Search<String> searchAlgorithm;
-        StringBuilder resultMessage = new StringBuilder();
 
         switch (searchType) {
             case "Linear Search":
                 searchAlgorithm = new LinearSearch<>();
                 break;
             case "Binary Search":
+                // Binary search only works on index-accessible and sorted structures
+                if (dataStructure instanceof BinarySearchTreeStructure) {
+                    searchResult.setText("Binary Search is not supported on Binary Search Trees.");
+                    return;
+                }
                 searchAlgorithm = new BinarySearch<>();
                 break;
             default:
+                searchResult.setText("Please select a valid search algorithm.");
                 return;
         }
 
-        // Capture the search result
-        boolean found = false;
-        for (int i = 0; i < dataStructure.size(); i++) {
-            if (dataStructure.get(i).equals(searchValue)) {
-                resultMessage.append("Found: ").append(searchValue).append(" at index: ").append(i).append("\n");
-                found = true;
-            }
-        }
-
-        if (!found) {
-            resultMessage.append("Not found: ").append(searchValue);
-        }
-
-        // Display the result in the searchResult label
-        searchResult.setText(resultMessage.toString());
+        String result = searchAlgorithm.search(dataStructure, searchValue);
+        searchResult.setText(result);
     }
 }
