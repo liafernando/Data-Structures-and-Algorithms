@@ -49,5 +49,7 @@ A JavaFX-based desktop application that demonstrates fundamental data structures
 
 2. ** Open and the folder and run the main file**
 
-For Futher details Contact: Ameli Fernando
+
+
+*For Futher clarifications Contact: Ameli Fernando
 
